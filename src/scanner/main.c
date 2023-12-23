@@ -24,5 +24,6 @@ int main() {
 
 out:
     if(res == -EIO) printf("Error reading file!\n");
+    fclose(yyin);
     return res;
 }
