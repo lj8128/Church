@@ -11,19 +11,27 @@ const char* token_names[] = {"EOF_TOKEN", "NAME", "LAMBDA", "DOT", "L_PAREN", "R
 int main() {
     int res = SUCCESS;
 
-    if((yyin = fopen("./src/scanner/test.txt", "r")) == NULL) {
-        res = -EIO;
+    if((yyin = fopen("./data/test.txt", "r")) == NULL) {
+        res = -EI;
         goto out;
     };
 
+    FILE* scanner_output;
+    if((scanner_output = fopen("./data/scanner_output.txt", "w")) == NULL) {
+        res = -EO;
+        goto out;
+    }
+
     token cur_token = yylex();
     while(cur_token != EOF_TOKEN) {
-        printf("%s: %s\n", token_names[cur_token], yytext);
+        fprintf(scanner_output, "%d ", cur_token);
         cur_token = yylex();
     }
 
 out:
-    if(res == -EIO) printf("Error reading file!\n");
+    if(res == -EI) printf("Error reading file!\n");
+    if(res == -EO) printf("Error writing to file!\n");
     fclose(yyin);
+    fclose(scanner_output);
     return res;
 }
