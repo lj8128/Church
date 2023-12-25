@@ -12,13 +12,13 @@ int main() {
     int res = SUCCESS;
 
     if((yyin = fopen("./data/test.txt", "r")) == NULL) {
-        res = -EI;
+        res = EI;
         goto out;
     };
 
     FILE* scanner_output;
     if((scanner_output = fopen("./data/scanner_output.txt", "w")) == NULL) {
-        res = -EO;
+        res = EO;
         goto out;
     }
 
@@ -29,8 +29,8 @@ int main() {
     }
 
 out:
-    if(res == -EI) printf("Error reading file!\n");
-    if(res == -EO) printf("Error writing to file!\n");
+    if(res == EI) printf("Error reading file!\n");
+    if(res == EO) printf("Error writing to file!\n");
     fclose(yyin);
     fclose(scanner_output);
     return res;
