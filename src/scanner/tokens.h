@@ -6,6 +6,7 @@ typedef enum {
     NAME,
     LAMBDA,
     DOT,
+    APPLICATION,
     L_PAREN,
     R_PAREN,
     ERROR
